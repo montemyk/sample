@@ -2,7 +2,7 @@
 
 	function connect_db(){
 
-	$dbname = 'stats_test';
+	$dbname = 'stats_aggre_live';
 	$dbuser = 'root';
 	$dbpass = 'root';
 
