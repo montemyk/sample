@@ -894,14 +894,16 @@
 	}
 	
 	function show_swf(){
+		echo "<table>";
+		echo "<tr><td align='center' class='textbox-label'>What STATS AGGREGATOR do?</td></tr>";
 		echo "<tr align='center'><td>";
-		echo "<br><br><br><br>";		
-		echo "<embed src='./swf/interconnect.swf' width='200' height='200' />";
-		echo "<embed src='./swf/integrate.swf' width='200' height='200' />";		
-		echo "<embed src='./swf/present.swf' width='200' height='200' />";		
-		echo "<embed src='./swf/map.swf' width='200' height='200' />";		
-		echo "<embed src='./swf/archive.swf' width='200' height='200' />";		
+		echo "<embed src='./swf/interconnect.swf' width='120' height='120' />";
+		echo "<embed src='./swf/integrate.swf' width='120' height='120' />";		
+		echo "<embed src='./swf/present.swf' width='120' height='120' />";		
+		echo "<embed src='./swf/map.swf' width='120' height='120' />";		
+		echo "<embed src='./swf/archive.swf' width='120' height='120' />";		
 		echo "</td></tr>";	
+		echo "</table>";
 	}
 	
 	
@@ -953,6 +955,37 @@
 
 		return $str_label;
 	}
+
+	function show_stats_box(){
+		
+	
+	
+	}
+
+
+	function show_shoutbox(){
+		$q_shoutbox = mysql_query("SELECT title, content, date_posted, author FROM announcements ORDER BY date_posted DESC" ) or die("Cannot query 967: ".mysql_error());
+
+		echo "<table width='600' border='1'>";
+		echo "<tr><td align='center' class='textbox-label'>ANNOUNCEMENT SHOUTBOX</td></tr>";
+		
+		if(mysql_num_rows($q_shoutbox)==0):
+			echo "<tr><td>";
+			echo "No posted announcement.";
+			echo "</td></tr>";
+		else:
+			while(list($title,$content,$date_posted,$author)=mysql_fetch_array($q_shoutbox)){
+				echo "<tr><td>";
+				echo $title.' posted on '.$date_posted.' by '.$author.'<br>';
+				echo "<p align='justify'>".$content."</p>";
+				echo "</td></tr>";
+			}
+		endif;
+		
+
+		echo "</table>";
+	}
+
 
 		
 	}	

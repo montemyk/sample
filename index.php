@@ -40,9 +40,12 @@ function autoSubmit()
 	}
 }
 
+
 <?php
 
 echo "</script>";
+
+
 
 echo "</head>";
 
@@ -127,7 +130,22 @@ echo "<body>";
   
   else: 
   	$layout->show_login_form(); 
+
+	echo "<table border='1'>";
+	echo "<tr>";
+	
+	echo "<td>";
 	$layout->show_swf();
+	echo "<br>";
+	$layout->show_shoutbox();
+	echo "</td>";
+
+	echo "<td valign='top'>";
+
+	echo "</td>";
+	echo "</tr>";
+
+	echo "</table>";
 	
   endif;
   
@@ -135,6 +153,7 @@ echo "<body>";
   
   
 $layout->footer();
+
 echo "</body>";
 echo "</html>";
 
