@@ -272,8 +272,7 @@
 						$q_search = mysql_query("SELECT HFHUDCODE, MONTH, YEAR FROM prog_maternal_care WHERE HFHUDCODE='$arr_content[0]' AND MONTH='$arr_content[5]' AND YEAR='$arr_content[6]'") or die("Cannot query 222: ".mysql_error());
 
 						if(mysql_num_rows($q_search)==0):
-						
-						$q_insert = mysql_query("INSERT INTO ".$tbl_name." SET HFHUDCODE='$arr_content[0]',REGCODE='$arr_content[1]',PROVCODE='$arr_content[2]',CITYCODE='$arr_content[3]',BGYCODE='$arr_content[4]',MONTH='$arr_content[5]',YEAR='$arr_content[6]',PC1='$arr_content[7]',PC2='$arr_content[8]',PC3='$arr_content[9]',PC4='$arr_content[10]',PC5='$arr_content[11]',PP1='$arr_content[12]',PP2='$arr_content[13]',PP3='$arr_content[14]',PP4='$arr_content[15]',FINAL='$arr_content[16]'") or die("Cannot query 206: ".mysql_error());			
+						$q_insert = mysql_query("INSERT INTO ".$tbl_name." SET HFHUDCODE='$arr_content[0]',REGCODE='$arr_content[1]',PROVCODE='$arr_content[2]',CITYCODE='$arr_content[3]',BGYCODE='$arr_content[4]',MONTH='$arr_content[5]',YEAR='$arr_content[6]',PC1='$arr_content[7]',PC2='$arr_content[8]',PC3='$arr_content[9]',PC4='$arr_content[10]',PC5='$arr_content[11]',PP1='$arr_content[12]',PP2='$arr_content[13]',PP3='$arr_content[14]',PP4='$arr_content[15]',W1049_VITA='$arr_content[16]',DELIV='$arr_content[17]',PREG='$arr_content[18]',PREG_SYP_TEST='$arr_content[19]',PREG_SYP_POSITIVE='$arr_content[20]',PREG_PENICILLIN='$arr_content[21]',FINAL='$arr_content[22]'") or die("Cannot query 206: ".mysql_error());			
 						else:
 							echo "The approved file was already stored in the database. ";
 						endif;
