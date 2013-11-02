@@ -957,9 +957,10 @@
 	}
 
 	function show_stats_box(){
-		
+		echo "<table width='650'>";
+		echo "<tr><td align='center' class='textbox-label'>STATISTICS FROM SELECTED INDICATORS</td></tr>";
 	
-	
+		echo "</table>";
 	}
 
 

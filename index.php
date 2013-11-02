@@ -141,7 +141,7 @@ echo "<body>";
 	echo "</td>";
 
 	echo "<td valign='top'>";
-
+	$layout->show_stats_box();
 	echo "</td>";
 	echo "</tr>";
 
