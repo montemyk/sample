@@ -733,7 +733,7 @@
 						$col_name = $r_indicator["indicator_code"];
 
 						if(!empty($str_hf)): 
-							$q_sum_indicator = mysql_query("SELECT SUM($col_name) FROM $tbl_name WHERE MONTH='$buwan' AND YEAR='$value[1]' AND HFHUDCODE IN ($str_hf)") or die("Cannot query 624: ".mysql_error());
+							$q_sum_indicator = mysql_query("SELECT SUM($col_name) FROM $tbl_name WHERE MONTH='$buwan' AND YEAR='$value[1]' AND HFHUDCODE IN ($str_hf)") or die("Cannot query 736: ".mysql_error());
 						else: //province wide
 							//$q_sum_indicator = mysql_query("SELECT SUM(a.$col_name) FROM $tbl_name a, m_lib_health_facility b WHERE a.MONTH='$buwan' AND a.YEAR='$value[1]' AND a.HFHUDCODE=b.doh_class_id AND b.psgc_provcode='369'") or die("Cannot query 638: ".mysql_error());						
 							$q_sum_indicator = mysql_query("SELECT SUM($col_name) FROM $tbl_name WHERE MONTH='$buwan' AND YEAR='$value[1]' AND provcode='0369'") or die("Cannot query 638: ".mysql_error());						
@@ -807,9 +807,11 @@
 							$q_total = mysql_query("SELECT SUM($arr_field[$i]) FROM prog_m2_bhs WHERE ICD10_CODE='$icd' AND CONCAT(YEAR,'-',MONTH,'-15') BETWEEN '$first_date' AND '$last_date' AND PROVCODE='0369'") or die("Cannot query 693: ".mysql_error());
 							endif;
 
-							list($icd_total) = mysql_fetch_array($q_total);	 
-							array_push($arr_icd_inside,$icd_total);
-							$gt += $icd_total;							
+							if($arr_field[$i]!='65ABOVE_M' && $arr_field[$i]!='65ABOVE_F'):
+								list($icd_total) = mysql_fetch_array($q_total);	 
+								array_push($arr_icd_inside,$icd_total);
+								$gt += $icd_total;							
+							endif;
 						} $tot++;
 						array_push($arr_icd_inside,$gt);
 						array_push($arr_icd,$arr_icd_inside);
@@ -832,8 +834,10 @@
 								$q_total = mysql_query("SELECT $arr_field[$i] FROM prog_m2_bhs WHERE ICD10_CODE='$key' AND MONTH='$buwan' AND YEAR=$value2[1] AND PROVCODE='0369'") or die("Cannot query 726: ".mysql_error());
 							endif;
 
-							list($age_count) = mysql_fetch_array($q_total);
-							$suma += $age_count;
+							if($arr_field[$i]!='65ABOVE_M' && $arr_field[$i]!='65ABOVE_F'):
+								list($age_count) = mysql_fetch_array($q_total);
+								$suma += $age_count;
+							endif;
 						}
 					array_push($arr_icd_per_month,$suma);
 				}
@@ -842,8 +846,8 @@
 			}
 			
 			//print_r($arr_field);
-			//print_r($arr_icd_main_display);
 			
+
 			for($i=0;$i<count($arr_icd_main_display);$i++){
 
 				for($j=0;$j<count($arr_icd_main_display[$i]);$j++){
@@ -861,7 +865,7 @@
 						foreach($arr_icd_main_display[$i][$j] as $key=>$value){
 							echo "<td class='col-contents'>".$value."</td>";
 						}
-					elseif($j==2):						
+					elseif($j==2):				
 						echo "<td class='col-contents'><a href='scripts/disp_graph.php?type=gt&graph_arg=$str_icd&from_month=$_POST[sel_from_month]&from_year=$_POST[sel_from_year]&to_month=$_POST[sel_end_month]&to_year=$_POST[sel_end_year]&desc=$description' target='new'>".$arr_icd_main_display[$i][$j]."</a></td>";					
 						echo "</tr>";
 					else:
